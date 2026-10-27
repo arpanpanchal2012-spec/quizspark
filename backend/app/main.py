@@ -229,6 +229,9 @@ def create_room(quiz_id: str):
         "pin": pin,
         "quiz_id": quiz_id,
         "host_token": host_token,
+        "hostToken": host_token,
+        "host_key": host_token,
+        "host": {"token": host_token},
         "status": "waiting",
     }
 

@@ -75,9 +75,12 @@ export default function App() {
   async function hostQuiz(quizId: string) {
     setLoading(true);
     try {
-      const data = await api<{ pin: string; host_token: string }>('/api/rooms?quiz_id=' + encodeURIComponent(quizId), { method: 'POST' });
+      const data = await api<{ pin: string; host_token?: string; hostToken?: string; host_key?: string; host?: { token?: string } }>('/api/rooms?quiz_id=' + encodeURIComponent(quizId), { method: 'POST' });
+      const token = data.host_token || data.hostToken || data.host_key || data.host?.token;
+      if (!token) throw new Error('Server did not return a host token. Redeploy the QuizSpark API service.');
+
       setPin(data.pin);
-      setHostToken(data.host_token);
+      setHostToken(token);
       setPlayerId('');
       setRoom(null);
       setMode('host');
