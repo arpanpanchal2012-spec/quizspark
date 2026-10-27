@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 type Quiz = { id: string; title: string; question_count?: number; questions?: {text:string; options:string[]; correct_index:number; time_limit:number}[] };
-const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API = (import.meta.env.VITE_API_BASE_URL || 'https://quizspark-api.onrender.com').replace(/\/$/, '');
 
 export default function App() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
